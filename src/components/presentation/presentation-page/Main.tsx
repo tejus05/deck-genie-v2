@@ -24,7 +24,6 @@ import {
   updatePresentationTheme,
 } from "@/app/_actions/presentation/presentationActions";
 import { type PlateNode, type PlateSlide } from "../utils/parser";
-import { type ImageModelList } from "@/app/_actions/image/generate";
 
 export default function PresentationPage() {
   const params = useParams();
@@ -38,7 +37,6 @@ export default function PresentationPage() {
     setSlides,
     isGeneratingPresentation,
     setTheme,
-    setImageModel,
     setPresentationStyle,
     setLanguage,
     theme,
@@ -158,13 +156,6 @@ export default function PresentationPage() {
         }
       }
 
-      // Set imageModel if available
-      if (presentationData?.presentation?.imageModel) {
-        setImageModel(
-          presentationData?.presentation?.imageModel as ImageModelList
-        );
-      }
-
       // Set presentationStyle if available
       if (presentationData?.presentation?.presentationStyle) {
         setPresentationStyle(presentationData.presentation.presentationStyle);
@@ -184,7 +175,6 @@ export default function PresentationPage() {
     setOutline,
     setSlides,
     setTheme,
-    setImageModel,
     setPresentationStyle,
     setLanguage,
   ]);

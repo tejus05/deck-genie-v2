@@ -15,18 +15,8 @@ import {
   ImageIcon,
   AlertCircle,
 } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Spinner } from "@/components/ui/spinner";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
-import { usePresentationState } from "@/states/presentation-state";
-import { IMAGE_MODELS } from "../../theme/ThemeSettings";
-import { type ImageModelList } from "@/app/_actions/image/generate";
 
 export interface PresentationImageEditorProps {
   open: boolean;
@@ -49,7 +39,6 @@ export const PresentationImageEditor = ({
   onRegenerateWithSamePrompt,
   onGenerateWithNewPrompt,
 }: PresentationImageEditorProps) => {
-  const { imageModel, setImageModel } = usePresentationState();
   const [newPrompt, setNewPrompt] = useState(prompt ?? "");
 
   // Local error state for UI validation
@@ -69,7 +58,7 @@ export const PresentationImageEditor = ({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className="w-full max-w-xl overflow-y-auto sm:max-w-xl">
         <SheetHeader>
-          <SheetTitle>Image Generator</SheetTitle>
+          <SheetTitle>Image Search</SheetTitle>
         </SheetHeader>
 
         <div className="mt-6 space-y-6">
@@ -97,7 +86,7 @@ export const PresentationImageEditor = ({
                 <div className="flex flex-col items-center gap-2">
                   <Spinner className="h-6 w-6" />
                   <span className="text-sm text-muted-foreground">
-                    Generating image...
+                    Searching for images...
                   </span>
                 </div>
               </div>
@@ -131,43 +120,25 @@ export const PresentationImageEditor = ({
               <div className="flex h-60 items-center justify-center text-muted-foreground">
                 <div className="flex flex-col items-center gap-2">
                   <ImageIcon className="h-10 w-10 opacity-50" />
-                  <span>No image generated yet</span>
+                  <span>No image selected yet</span>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Prompt Input */}
+          {/* Search term Input */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">Image Prompt</label>
+            <label className="text-sm font-medium">Search Term</label>
             <Textarea
-              placeholder="Describe the image you want to generate..."
+              placeholder="Enter search terms to find images on Unsplash..."
               className="min-h-[100px]"
               value={newPrompt}
               onChange={(e) => setNewPrompt(e.target.value)}
               disabled={isGenerating}
             />
-          </div>
-
-          {/* Image Model Selection */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Image Model</label>
-            <Select
-              value={imageModel}
-              onValueChange={(value) => setImageModel(value as ImageModelList)}
-              disabled={isGenerating}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select image model" />
-              </SelectTrigger>
-              <SelectContent>
-                {IMAGE_MODELS.map((model) => (
-                  <SelectItem key={model.value} value={model.value}>
-                    {model.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <p className="text-xs text-muted-foreground">
+              We&apos;ll search Unsplash for high-quality stock photos matching your description.
+            </p>
           </div>
 
           {/* Action Buttons */}
@@ -180,11 +151,11 @@ export const PresentationImageEditor = ({
             >
               {isGenerating ? (
                 <>
-                  <Spinner className="mr-2 h-4 w-4" /> Generating...
+                  <Spinner className="mr-2 h-4 w-4" /> Searching...
                 </>
               ) : (
                 <>
-                  <Wand2 className="mr-2 h-4 w-4" /> Generate New
+                  <Wand2 className="mr-2 h-4 w-4" /> Search Images
                 </>
               )}
             </Button>
@@ -196,7 +167,7 @@ export const PresentationImageEditor = ({
                 disabled={isGenerating}
               >
                 <RefreshCw className="mr-2 h-4 w-4" />
-                Regenerate
+                Search Again
               </Button>
             )}
           </div>

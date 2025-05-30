@@ -14,11 +14,10 @@ import {
 } from "@/components/text-editor/plate-ui/resizable";
 import { type TImageElement } from "@udecode/plate-media";
 import { Spinner } from "@/components/ui/spinner";
-import { usePresentationState } from "@/states/presentation-state";
 import { PresentationImageEditor } from "./presentation-image-editor";
 import { useDebouncedSave } from "@/hooks/presentation/useDebouncedSave";
 import { useDraggable } from "../dnd/hooks/useDraggable";
-import { generateImageAction } from "@/app/_actions/image/generate";
+import { getUnsplashImageAction } from "@/app/_actions/image/unsplash";
 
 export interface PresentationImageElementProps {
   className?: string;
@@ -46,7 +45,6 @@ export const PresentationImageElement = withHOC(
       const [imageUrl, setImageUrl] = useState<string | undefined>(
         props.element.url
       );
-      const { imageModel } = usePresentationState();
       const hasHandledGenerationRef = useRef(false);
 
       const generateImage = async (prompt: string) => {
@@ -61,7 +59,7 @@ export const PresentationImageElement = withHOC(
         setError(undefined);
         try {
           hasHandledGenerationRef.current = true;
-          const result = await generateImageAction(prompt, imageModel);
+          const result = await getUnsplashImageAction(prompt);
           if (
             result &&
             typeof result === "object" &&
@@ -84,8 +82,8 @@ export const PresentationImageElement = withHOC(
             }, 500);
           }
         } catch (error) {
-          console.error("Error generating image:", error);
-          setError("Failed to generate image. Please try again.");
+          console.error("Error getting image from Unsplash:", error);
+          setError("Failed to get image from Unsplash. Please try again.");
         } finally {
           setIsGenerating(false);
         }

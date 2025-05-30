@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { type Themes, type ThemeProperties } from "@/lib/presentation/themes";
-import { type ImageModelList } from "@/app/_actions/image/generate";
 import { type PlateSlide } from "@/components/presentation/utils/parser";
 
 interface PresentationState {
@@ -16,12 +15,12 @@ interface PresentationState {
   pageStyle: string;
   showTemplates: boolean;
   presentationInput: string;
-  imageModel: ImageModelList;
   presentationStyle: string;
   savingStatus: "idle" | "saving" | "saved";
   isPresenting: boolean;
   currentSlideIndex: number;
   isThemeCreatorOpen: boolean;
+  imageGenerationModelOpen: boolean;
 
   // Generation states
   shouldStartOutlineGeneration: boolean;
@@ -48,7 +47,6 @@ interface PresentationState {
   setShowTemplates: (show: boolean) => void;
   setPresentationInput: (input: string) => void;
   setOutline: (topics: string[]) => void;
-  setImageModel: (model: ImageModelList) => void;
   setPresentationStyle: (style: string) => void;
   setSavingStatus: (status: "idle" | "saving" | "saved") => void;
   setIsPresenting: (isPresenting: boolean) => void;
@@ -57,6 +55,7 @@ interface PresentationState {
   previousSlide: () => void;
 
   setIsThemeCreatorOpen: (update: boolean) => void;
+  setImageGenerationModelOpen: (open: boolean) => void;
   // Generation actions
   setShouldStartOutlineGeneration: (shouldStart: boolean) => void;
   setShouldStartPresentationGeneration: (shouldStart: boolean) => void;
@@ -90,13 +89,13 @@ export const usePresentationState = create<PresentationState>((set) => ({
   outline: [],
   theme: "mystique",
   customThemeData: null,
-  imageModel: "black-forest-labs/FLUX.1-schnell-Free",
   presentationStyle: "professional",
   slides: [], // Now holds the new slide object structure
   savingStatus: "idle",
   isPresenting: false,
   currentSlideIndex: 0,
   isThemeCreatorOpen: false,
+  imageGenerationModelOpen: false,
 
   // Generation states
   shouldStartOutlineGeneration: false,
@@ -122,7 +121,6 @@ export const usePresentationState = create<PresentationState>((set) => ({
   setShowTemplates: (show) => set({ showTemplates: show }),
   setPresentationInput: (input) => set({ presentationInput: input }),
   setOutline: (topics) => set({ outline: topics }),
-  setImageModel: (model) => set({ imageModel: model }),
   setPresentationStyle: (style) => set({ presentationStyle: style }),
   setSavingStatus: (status) => set({ savingStatus: status }),
   setIsPresenting: (isPresenting) => set({ isPresenting }),
@@ -170,6 +168,7 @@ export const usePresentationState = create<PresentationState>((set) => ({
     }),
 
   setIsThemeCreatorOpen: (update) => set({ isThemeCreatorOpen: update }),
+  setImageGenerationModelOpen: (open) => set({ imageGenerationModelOpen: open }),
   // Selection state
   isSelecting: false,
   selectedPresentations: [],

@@ -14,7 +14,6 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { getCustomThemeById } from "@/app/_actions/presentation/theme-actions";
 import { getPresentation } from "@/app/_actions/presentation/presentationActions";
-import { type ImageModelList } from "@/app/_actions/image/generate";
 import { ThemeBackground } from "@/components/presentation/theme/ThemeBackground";
 import { ThemeSettings } from "@/components/presentation/theme/ThemeSettings";
 import { Header } from "@/components/presentation/outline/Header";
@@ -34,7 +33,6 @@ export default function PresentationGenerateWithIdPage() {
     setOutline,
     setShouldStartOutlineGeneration,
     setTheme,
-    setImageModel,
     setPresentationStyle,
     setLanguage,
   } = usePresentationState();
@@ -120,13 +118,6 @@ export default function PresentationGenerateWithIdPage() {
         }
       }
 
-      // Set imageModel if available
-      if (presentationData?.presentation?.imageModel) {
-        setImageModel(
-          presentationData?.presentation?.imageModel as ImageModelList
-        );
-      }
-
       // Set presentationStyle if available
       if (presentationData?.presentation?.presentationStyle) {
         setPresentationStyle(presentationData.presentation.presentationStyle);
@@ -144,7 +135,6 @@ export default function PresentationGenerateWithIdPage() {
     setPresentationInput,
     setOutline,
     setTheme,
-    setImageModel,
     setPresentationStyle,
     setLanguage,
   ]);

@@ -9,7 +9,7 @@ export const env = createEnv({
       .default("development"),
 
     GEMINI_API_KEY: z.string(),
-    TOGETHER_AI_API_KEY: z.string(),
+    UNSPLASH_API_KEY: z.string(),
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
     NEXTAUTH_URL: z.preprocess(
@@ -28,7 +28,7 @@ export const env = createEnv({
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     NODE_ENV: process.env.NODE_ENV,
     GEMINI_API_KEY: process.env.GEMINI_API_KEY,
-    TOGETHER_AI_API_KEY: process.env.TOGETHER_AI_API_KEY,
+    UNSPLASH_API_KEY: process.env.UNSPLASH_API_KEY,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },

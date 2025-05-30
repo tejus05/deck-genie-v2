@@ -31,7 +31,6 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
           currentPresentationTitle,
           theme,
           outline,
-          imageModel,
           presentationStyle,
           language,
         } = usePresentationState.getState();
@@ -49,7 +48,6 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
             title: currentPresentationTitle ?? "",
             outline,
             theme,
-            imageModel,
             presentationStyle,
             language,
           });
@@ -87,7 +85,6 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
       currentPresentationTitle,
       theme,
       outline,
-      imageModel,
       presentationStyle,
       language,
     } = usePresentationState.getState();
@@ -106,7 +103,6 @@ export const useDebouncedSave = (options: UseDebouncedSaveOptions = {}) => {
         title: currentPresentationTitle ?? "",
         outline,
         language,
-        imageModel,
         presentationStyle,
         theme,
       });

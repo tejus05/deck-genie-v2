@@ -12,7 +12,7 @@ export async function createPresentation(
   title: string,
   theme = "default",
   outline?: string[],
-  imageModel?: string,
+  _imageModel?: string,
   presentationStyle?: string,
   language?: string
 ) {
@@ -33,7 +33,6 @@ export async function createPresentation(
           create: {
             content: content as unknown as InputJsonValue,
             theme: theme,
-            imageModel,
             presentationStyle,
             language,
             outline: outline,
@@ -74,7 +73,7 @@ export async function updatePresentation({
   title,
   theme,
   outline,
-  imageModel,
+  _imageModel,
   presentationStyle,
   language,
 }: {
@@ -85,7 +84,7 @@ export async function updatePresentation({
   title?: string;
   theme?: string;
   outline?: string[];
-  imageModel?: string;
+  _imageModel?: string;
   presentationStyle?: string;
   language?: string;
 }) {
@@ -97,7 +96,6 @@ export async function updatePresentation({
   try {
     // Extract values from content if provided there
     const effectiveTheme = theme;
-    const effectiveImageModel = imageModel;
     const effectivePresentationStyle = presentationStyle;
     const effectiveLanguage = language;
 
@@ -110,7 +108,6 @@ export async function updatePresentation({
           update: {
             content: content as unknown as InputJsonValue,
             theme: effectiveTheme,
-            imageModel: effectiveImageModel,
             presentationStyle: effectivePresentationStyle,
             language: effectiveLanguage,
             outline,

@@ -35,7 +35,7 @@ An open-source inspired by gamma.app, AI-powered presentation generator that cre
 - Node.js 18.x or higher
 - npm or yarn
 - Google Gemini API key (for AI text generation features)
-- Together AI API key (for Image generation)
+- Unsplash API key (for image search and retrieval)
 - Google Client ID and Secret for authentication feature
 
 ### Installation
@@ -59,7 +59,7 @@ An open-source inspired by gamma.app, AI-powered presentation generator that cre
    ```
    # AI Providers
    GEMINI_API_KEY=""
-   TOGETHER_AI_API_KEY=""
+   UNSPLASH_API_KEY=""
 
 
    # For Next Auth

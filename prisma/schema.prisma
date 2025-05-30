@@ -61,7 +61,7 @@ model User {
 
     CustomTheme CustomTheme[]
 
-    GeneratedImage GeneratedImage[]
+    imageUsages ImageUsage[]
 }
 
 enum DocumentType {
@@ -99,7 +99,6 @@ model Presentation {
     id                String       @id @default(cuid())
     content           Json // Presentation content including slides, theme, etc.
     theme             String       @default("default")
-    imageModel        String? // The image model used for generating images
     presentationStyle String? // The style of the presentation
     language          String?      @default("en-US") // The language of the presentation
     outline           String[] // Store the presentation outline
@@ -133,12 +132,14 @@ model FavoriteDocument {
     user       User         @relation(fields: [userId], references: [id])
 }
 
-model GeneratedImage {
+model ImageUsage {
     id        String   @id @default(cuid())
-    url       String
+    imageUrl  String   // The Unsplash image URL
+    unsplashId String  // The Unsplash image ID
+    searchTerm String  // The search term used to find the image
+    photographer String // The photographer's name
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     userId    String
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    prompt    String
 }

@@ -17,7 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useDebouncedSave } from "@/hooks/presentation/useDebouncedSave";
 import { useEditorRef } from "@udecode/plate-core/react";
-import { generateImageAction } from "@/app/_actions/image/generate";
+import { getUnsplashImageAction } from "@/app/_actions/image/unsplash";
 import { type PlateSlide } from "../../utils/parser";
 import { useDraggable } from "../dnd/hooks/useDraggable";
 
@@ -32,7 +32,7 @@ export default function RootImage({
   layoutType?: string;
   shouldGenerate?: boolean;
 }) {
-  const { setSlides, imageModel } = usePresentationState();
+  const { setSlides } = usePresentationState();
   const { saveImmediately } = useDebouncedSave();
   const id = useId();
   const [imageUrl, setImageUrl] = useState<string | undefined>(image.url);
@@ -63,7 +63,7 @@ export default function RootImage({
     setIsGenerating(true);
     setError(undefined);
     try {
-      const result = await generateImageAction(prompt, imageModel);
+      const result = await getUnsplashImageAction(prompt);
       if (result.image?.url) {
         const newImageUrl = result.image.url;
         setImageUrl(newImageUrl);
@@ -98,8 +98,8 @@ export default function RootImage({
         setIsGenerating(false);
       }
     } catch (error) {
-      console.error("Error generating image:", error);
-      setError("Failed to generate image. Please try again.");
+      console.error("Error getting image from Unsplash:", error);
+      setError("Failed to get image from Unsplash. Please try again.");
       setIsGenerating(false);
     } finally {
       setIsGenerating(false);
