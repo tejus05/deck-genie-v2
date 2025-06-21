@@ -87,12 +87,12 @@ export const TimelineItem = ({
       )}
 
       {/* Circle marker */}
-      <div className="absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white">
+      <div className="absolute left-0 top-6 flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white">
         {index + 1}
       </div>
 
       {/* Event content */}
-      <div className="flex items-center rounded-lg p-4 pl-2 shadow-sm">
+      <div className="flex items-center rounded-lg p-4 pl-14 shadow-sm">
         {children}
       </div>
     </div>
