@@ -96,7 +96,7 @@ export const ArrowItem = ({
       </div>
 
       {/* Content column */}
-      <div className="flex flex-1 items-center p-4">{children}</div>
+      <div className="flex px-4">{children}</div>
     </div>
   );
 };
