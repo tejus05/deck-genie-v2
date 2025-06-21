@@ -9,7 +9,6 @@ import {
   PanelLeft,
   PanelTop,
   AlignCenter,
-  MoveHorizontal,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -53,7 +52,6 @@ export function SlideEditPopover({ index }: SlideEditPopoverProps) {
   const currentSlide = slides[index];
   const currentLayout = currentSlide?.layoutType ?? "left";
   const currentBgColor = currentSlide?.bgColor ?? "#4D4D4D";
-  const currentWidth = currentSlide?.width ?? "M";
   const currentAlignment = currentSlide?.alignment ?? "start";
   const hasRootImage = !!currentSlide?.rootImage;
 
@@ -208,7 +206,7 @@ export function SlideEditPopover({ index }: SlideEditPopoverProps) {
             </div>
           </div>
 
-          {/* Card Width */}
+          {/* Card Width - Disabled for consistent slide widths 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <MoveHorizontal className="h-4 w-4"></MoveHorizontal>
@@ -239,6 +237,7 @@ export function SlideEditPopover({ index }: SlideEditPopoverProps) {
               </Button>
             </div>
           </div>
+          */}
         </div>
       </PopoverContent>
     </Popover>

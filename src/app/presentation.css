@@ -497,15 +497,15 @@ h6.presentation-heading {
   font-size: 1.2rem;
 }
 
-[data-is-presenting="true"] .presentation-slide h1.presentation-heading {
+[data-is_presenting="true"] .presentation-slide h1.presentation-heading {
   font-size: 2.5rem;
 }
 
-[data-is-presenting="true"] .presentation-slide h2.presentation-heading {
+[data-is_presenting="true"] .presentation-slide h2.presentation-heading {
   font-size: 2rem;
 }
 
-[data-is-presenting="true"] .presentation-slide h3.presentation-heading {
+[data-is_presenting="true"] .presentation-slide h3.presentation-heading {
   font-size: 1.75rem;
 }
 
@@ -525,4 +525,42 @@ h6.presentation-heading {
 .slide-container-16-9 > * {
   height: 100%;
   width: 100%;
+}
+
+/* Ensure consistent slide widths */
+.slide-container-16-9 {
+  /* Force consistent width for all slides */
+  width: 100% !important;
+  max-width: 64rem !important; /* equivalent to max-w-5xl (1024px) */
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Override any existing width classes with high specificity */
+.presentation-slide,
+.slide-container-16-9,
+.slide-container-16-9.max-w-5xl,
+.slide-container-16-9.max-w-6xl,
+[class*="slide-container"] {
+  max-width: 64rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Ensure the main presentation container doesn't constrain width */
+.presentation-slides {
+  width: 100%;
+  max-width: none;
+}
+
+/* Make sure all slide wrappers have consistent spacing */
+.slide-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.slide-wrapper:last-child {
+  margin-bottom: 0;
 }

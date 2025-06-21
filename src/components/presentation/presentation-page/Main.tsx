@@ -226,7 +226,7 @@ export default function PresentationPage() {
       isLoading={isLoading}
       themeData={currentThemeData ?? undefined}
     >
-      <div className="mx-auto max-w-[90%] space-y-8 p-8 pt-16">
+      <div className="mx-auto w-full max-w-none space-y-8 p-8 pt-16">
         <div className="space-y-8">
           <PresentationSlidesView
             handleSlideChange={handleSlideChange}

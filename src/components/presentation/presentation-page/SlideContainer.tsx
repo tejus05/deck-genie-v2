@@ -45,7 +45,6 @@ export function SlideContainer({
     setCurrentSlideIndex,
   } = usePresentationState();
 
-  const currentSlide = slides[index];
   const {
     attributes,
     listeners,
@@ -103,9 +102,7 @@ export function SlideContainer({
       <div
         className={cn(
           "relative w-full slide-container-16-9",
-          !isPresenting && currentSlide?.width === "M" && "max-w-5xl",
-          !isPresenting && currentSlide?.width === "L" && "max-w-6xl",
-          !isPresenting && !currentSlide?.width && "max-w-5xl", // Default to medium
+          !isPresenting && "max-w-5xl mx-auto", // Consistent width for all slides
           isPresenting && "h-full w-full no-aspect-ratio",
           className
         )}
