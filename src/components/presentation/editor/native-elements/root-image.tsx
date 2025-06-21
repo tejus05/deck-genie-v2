@@ -179,7 +179,8 @@ export default function RootImage({
       <div
         className={cn(
           "flex-1 basis-[45%]",
-          layoutType === "vertical" && "max-h-96 overflow-hidden"
+          layoutType === "vertical" && "max-h-[40%] overflow-hidden",
+          layoutType !== "vertical" && "max-h-full min-h-0"
         )}
       >
         <div
@@ -219,6 +220,10 @@ export default function RootImage({
                       src={imageUrl ?? image.url}
                       alt={image.query}
                       className="h-full w-full object-cover"
+                      style={{
+                        maxHeight: layoutType === "vertical" ? "100%" : "100%",
+                        objectFit: "cover"
+                      }}
                       onError={(e) => {
                         console.error(
                           "Image failed to load:",

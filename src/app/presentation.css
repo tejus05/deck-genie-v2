@@ -228,6 +228,14 @@ h6.presentation-heading {
   border: 1px solid var(--presentation-accent);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   color: var(--presentation-text) !important;
+  /* Enforce 16:9 aspect ratio for all slides */
+  aspect-ratio: 16 / 9;
+  /* Ensure content fits within the container */
+  overflow: hidden;
+  /* Set consistent dimensions */
+  width: 100%;
+  /* Remove flexible height behavior */
+  height: auto;
 }
 
 /* Additional theme-specific slide styling */
@@ -250,4 +258,271 @@ h6.presentation-heading {
 /* Override any inline bgColor from initialContent */
 .presentation-slide[style*="background"] {
   background-color: var(--presentation-background) !important;
+}
+
+/* Ensure consistent aspect ratio for slide content */
+[data-slide-content="true"] {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Layout-specific adjustments for 16:9 containers */
+[data-slide-content="true"].flex-row,
+[data-slide-content="true"].flex-row-reverse {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+[data-slide-content="true"].flex-col-reverse {
+  flex-direction: column-reverse;
+}
+
+/* Ensure editor content fits within 16:9 container */
+.presentation-slide .ProseMirror {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjust content spacing for fixed height */
+.presentation-slide .ProseMirror > * {
+  margin-bottom: 0.75rem;
+}
+
+.presentation-slide .ProseMirror > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Layout-specific content adjustments for 16:9 slides */
+
+/* Vertical layout (image at top) */
+[data-slide-content="true"].flex-col-reverse .ProseMirror {
+  gap: 0.5rem;
+}
+
+/* Horizontal layouts (image left/right) */
+[data-slide-content="true"].flex-row .ProseMirror,
+[data-slide-content="true"].flex-row-reverse .ProseMirror {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Image container adjustments for horizontal layouts */
+[data-slide-content="true"].flex-row .presentation-image-container,
+[data-slide-content="true"].flex-row-reverse .presentation-image-container {
+  flex: 0 0 auto;
+  max-width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Content text area in horizontal layouts */
+[data-slide-content="true"].flex-row > .ProseMirror,
+[data-slide-content="true"].flex-row-reverse > .ProseMirror {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  overflow-y: auto;
+}
+
+/* Adjust heading sizes for 16:9 container */
+.presentation-slide h1.presentation-heading {
+  font-size: 1.75rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.presentation-slide h2.presentation-heading {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+}
+
+.presentation-slide h3.presentation-heading {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin-bottom: 0.3rem;
+}
+
+/* Adjust paragraph spacing for fixed height */
+.presentation-slide .presentation-paragraph {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+/* Column layouts within 16:9 slides */
+.presentation-slide .flex.flex-row.gap-4 {
+  height: 100%;
+  align-items: stretch;
+}
+
+.presentation-slide .flex.flex-row.gap-4 > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* List and bullet point adjustments */
+.presentation-slide ul,
+.presentation-slide ol {
+  margin: 0.25rem 0;
+  padding-left: 1.25rem;
+}
+
+.presentation-slide li {
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+}
+
+/* Chart and visualization containers */
+.presentation-slide [class*="chart"],
+.presentation-slide [class*="visualization"] {
+  height: auto;
+  max-height: 70%;
+  overflow: visible;
+}
+
+/* Image sizing within 16:9 container */
+.presentation-slide .presentation-image {
+  max-height: 80%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Cycle and pyramid elements adjustments */
+.presentation-slide .grid.grid-cols-3 {
+  height: 100%;
+  align-items: center;
+}
+
+/* Staircase elements */
+.presentation-slide [class*="stair"] {
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+/* Specific adjustments for custom elements within 16:9 slides */
+
+/* Cycle elements */
+.presentation-slide .grid.grid-cols-3.gap-4 {
+  height: auto;
+  max-height: 85%;
+  padding: 0 1rem;
+}
+
+.presentation-slide .grid.grid-cols-3.gap-4 .h-64.w-64 {
+  height: 12rem;
+  width: 12rem;
+}
+
+/* Pyramid and visualization elements */
+.presentation-slide [class*="pyramid"],
+.presentation-slide [class*="staircase"],
+.presentation-slide [class*="visualization"] {
+  max-height: 85%;
+  overflow-y: auto;
+}
+
+/* Icon elements */
+.presentation-slide [class*="icon-item"] {
+  padding: 0.25rem 0;
+}
+
+/* Chart containers */
+.presentation-slide [class*="chart-container"] {
+  max-height: 75%;
+  width: 100%;
+}
+
+/* Bullet lists and columns spacing */
+.presentation-slide .flex.flex-row.gap-4 > * {
+  padding: 0.5rem;
+}
+
+/* Timeline and arrow elements */
+.presentation-slide [class*="timeline"],
+.presentation-slide [class*="arrow"] {
+  max-height: 80%;
+  padding: 0.5rem 0;
+}
+
+/* Responsive text sizing within fixed containers */
+@media (max-width: 768px) {
+  .presentation-slide h1.presentation-heading {
+    font-size: 1.5rem;
+  }
+  
+  .presentation-slide h2.presentation-heading {
+    font-size: 1.25rem;
+  }
+  
+  .presentation-slide .presentation-paragraph {
+    font-size: 0.875rem;
+  }
+}
+
+/* Ensure content doesn't overflow horizontally */
+.presentation-slide * {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Presentation mode specific styling for 16:9 aspect ratio */
+[data-is-presenting="true"] {
+  /* In presentation mode, use viewport dimensions but maintain aspect ratio */
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-is-presenting="true"] .presentation-slide {
+  /* Calculate the maximum size while maintaining 16:9 aspect ratio */
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  aspect-ratio: 16 / 9;
+}
+
+/* Ensure content scales properly in presentation mode */
+[data-is-presenting="true"] .presentation-slide .ProseMirror {
+  transform: scale(1);
+  font-size: 1.2rem;
+}
+
+[data-is-presenting="true"] .presentation-slide h1.presentation-heading {
+  font-size: 2.5rem;
+}
+
+[data-is-presenting="true"] .presentation-slide h2.presentation-heading {
+  font-size: 2rem;
+}
+
+[data-is-presenting="true"] .presentation-slide h3.presentation-heading {
+  font-size: 1.75rem;
+}
+
+/* Slide container sizing utilities */
+.slide-container-16-9 {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: auto;
+}
+
+/* Prevent aspect ratio in specific cases */
+.slide-container-16-9.no-aspect-ratio {
+  aspect-ratio: unset;
+}
+
+/* Slide content should fill the container properly */
+.slide-container-16-9 > * {
+  height: 100%;
+  width: 100%;
 }

@@ -38,7 +38,7 @@ export function SlidePreview({
             </div>
             <div
               id={`slide-preview-${index}`}
-              className="pointer-events-none h-max min-h-9 w-full overflow-hidden bg-card"
+              className="pointer-events-none aspect-video w-full overflow-hidden bg-card"
             />
           </div>
         ))}

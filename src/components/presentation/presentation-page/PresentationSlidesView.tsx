@@ -90,8 +90,8 @@ export const PresentationSlidesView = ({
                   <PresentationEditor
                     initialContent={slide}
                     className={cn(
-                      "min-h-[300px] rounded-md border",
-                      isPresenting && "h-screen w-screen"
+                      "aspect-video w-full rounded-md border",
+                      isPresenting && "!h-full !w-full !aspect-auto rounded-none border-none"
                     )}
                     id={slide.id}
                     autoFocus={index === currentSlideIndex}
@@ -107,7 +107,7 @@ export const PresentationSlidesView = ({
               <SlidePreviewRenderer slideIndex={index} slideId={slide.id}>
                 <PresentationEditor
                   initialContent={slide}
-                  className="min-h-[300px] border"
+                  className="aspect-video w-full border"
                   id={`preview-${slide.id}`}
                   isPreview={true}
                   readOnly={true}

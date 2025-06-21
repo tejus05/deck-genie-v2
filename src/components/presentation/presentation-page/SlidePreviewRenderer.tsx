@@ -43,9 +43,14 @@ export function SlidePreviewRenderer({
       const previewWidth = previewRect.width;
       const previewHeight = previewRect.height;
       const editorWidth = editorRect.width;
-      const editorHeight = editorRect.height;
-      // Calculate scale for width to fit the preview
-      const newScale = previewWidth / editorWidth;
+      // For 16:9 aspect ratio, calculate height based on width
+      const editorHeight = editorWidth * (9 / 16);
+      
+      // Calculate scale to fit the preview maintaining aspect ratio
+      const scaleX = previewWidth / editorWidth;
+      const scaleY = previewHeight / editorHeight;
+      const newScale = Math.min(scaleX, scaleY);
+      
       setDimensions({
         editorWidth,
         editorHeight,
@@ -82,9 +87,8 @@ export function SlidePreviewRenderer({
   const previewElement = document.querySelector(`#slide-preview-${slideIndex}`);
   if (!previewElement) return null;
 
-  // Calculate expected height based on the aspect ratio
-  const aspectRatio = dimensions.editorHeight / dimensions.editorWidth;
-  const expectedHeight = dimensions.previewWidth * aspectRatio;
+  // For 16:9 aspect ratio, calculate expected height
+  const expectedHeight = dimensions.previewWidth * (9 / 16);
 
   return (
     <div
@@ -94,10 +98,10 @@ export function SlidePreviewRenderer({
       {children}
       {createPortal(
         <div
-          className="max-h-96"
+          className="w-full"
           style={{
-            height:
-              expectedHeight && expectedHeight > 0 ? expectedHeight : "75px",
+            height: expectedHeight && expectedHeight > 0 ? expectedHeight : "75px",
+            aspectRatio: "16 / 9",
             transition: "height 150ms ease-in-out",
           }}
         >

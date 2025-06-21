@@ -102,10 +102,11 @@ export function SlideContainer({
       />
       <div
         className={cn(
-          "relative w-full",
-          !isPresenting && currentSlide?.width !== "M" && "max-w-5xl",
-          !isPresenting && currentSlide?.width !== "L" && "max-w-6xl",
-          isPresenting && "h-full w-full",
+          "relative w-full slide-container-16-9",
+          !isPresenting && currentSlide?.width === "M" && "max-w-5xl",
+          !isPresenting && currentSlide?.width === "L" && "max-w-6xl",
+          !isPresenting && !currentSlide?.width && "max-w-5xl", // Default to medium
+          isPresenting && "h-full w-full no-aspect-ratio",
           className
         )}
       >
